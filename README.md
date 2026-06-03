@@ -1,5 +1,5 @@
-
     // "postinstall": "electron-builder install-app-deps"
+
 # TestPrep Pro
 
 Offline-first desktop test preparation application built with **React 19**, **Electron**, **Node.js**, and **SQLite** (better-sqlite3).
@@ -13,12 +13,12 @@ Offline-first desktop test preparation application built with **React 19**, **El
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|------------|
-| UI | React 19, Vite, MUI, Framer Motion, Zustand, React Router |
-| Desktop | Electron, electron-builder |
-| Backend | Node.js, TypeScript, better-sqlite3, Zod, xlsx |
-| Database | SQLite (WAL mode) |
+| Layer    | Technology                                                |
+| -------- | --------------------------------------------------------- |
+| UI       | React 19, Vite, MUI, Framer Motion, Zustand, React Router |
+| Desktop  | Electron, electron-builder                                |
+| Backend  | Node.js, TypeScript, better-sqlite3, Zod, xlsx            |
+| Database | SQLite (WAL mode)                                         |
 
 ## Project Structure
 
@@ -52,24 +52,26 @@ npm run dev
 
 ## Demo Credentials
 
-| Role | Email | Password |
-|------|-------|----------|
-| Admin | admin@testprep.com | admin123 |
+| Role    | Email                | Password   |
+| ------- | -------------------- | ---------- |
+| Admin   | admin@testprep.com   | admin123   |
 | Student | student@testprep.com | student123 |
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start Vite dev server + Electron |
-| `npm run build` | Build frontend & backend |
-| `npm run dist` | Package desktop app (electron-builder) |
-| `npm run lint` | Lint frontend & backend |
-| `npm run format` | Prettier format |
+| Command          | Description                            |
+| ---------------- | -------------------------------------- |
+| `npm run dev`    | Start Vite dev server + Electron       |
+| `npm run build`  | Build frontend & backend               |
+| `npm run dist`   | Package desktop app (electron-builder) |
+| `npm run lint`   | Lint frontend & backend                |
+| `npm run format` | Prettier format                        |
 
 ## Excel Import Format
 
 Columns (header row required): `question`, `optionA`, `optionB`, `optionC`, `optionD`, `correctAnswer`, `marks`
+
+Admins can also create a new test directly from an Excel file via the admin tests page.
 
 See `docs/EXCEL_IMPORT.md` for details.
 

@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Grid,
-  Typography,
-  Chip,
-} from '@mui/material';
+import { Box, Button, Card, CardActions, CardContent, Grid, Typography, Chip, IconButton } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -20,6 +11,7 @@ import { EmptyState } from '@/components/common/EmptyState';
 import QuizIcon from '@mui/icons-material/Quiz';
 import { useToast } from '@/hooks/useToast';
 import type { Attempt, Test } from '@/types';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { formatDuration } from '@/utils/format';
 
 export function AvailableTestsPage() {
@@ -73,9 +65,14 @@ export function AvailableTestsPage() {
 
   return (
     <>
-      <Typography variant="h5" fontWeight={700} mb={3}>
-        Available Tests
-      </Typography>
+      <Box display="flex" alignItems="center" gap={2} mb={3}>
+        <IconButton onClick={() => navigate('/student/dashboard')} size="small">
+          <ArrowBackIcon />
+        </IconButton>
+        <Typography variant="h5" fontWeight={700}>
+          Available Tests
+        </Typography>
+      </Box>
       {tests.length === 0 ? (
         <Card>
           <EmptyState
@@ -108,9 +105,7 @@ export function AvailableTestsPage() {
                   <Typography variant="body2" color="text.secondary" mb={2}>
                     {t.description || 'No description'}
                   </Typography>
-                  <Typography variant="body2">
-                    Duration: {formatDuration(t.duration)}
-                  </Typography>
+                  <Typography variant="body2">Duration: {formatDuration(t.duration)}</Typography>
                 </CardContent>
                 <CardActions>
                   <Button

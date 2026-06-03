@@ -1,5 +1,17 @@
-import { Card, Chip, Table, TableBody, TableCell, TableHead, TableRow, Typography, IconButton } from '@mui/material';
+import {
+  Box,
+  Card,
+  Chip,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Typography,
+  IconButton,
+} from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '@/services/api';
@@ -27,9 +39,14 @@ export function HistoryPage() {
 
   return (
     <>
-      <Typography variant="h5" fontWeight={700} mb={3}>
-        Test History
-      </Typography>
+      <Box display="flex" alignItems="center" gap={2} mb={3}>
+        <IconButton onClick={() => navigate('/student/dashboard')} size="small">
+          <ArrowBackIcon />
+        </IconButton>
+        <Typography variant="h5" fontWeight={700}>
+          Test History
+        </Typography>
+      </Box>
       {history.length === 0 ? (
         <Card>
           <EmptyState

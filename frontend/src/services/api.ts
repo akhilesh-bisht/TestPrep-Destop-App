@@ -18,8 +18,9 @@ export const api = {
   getAdminStats: () => invoke('dashboard:adminStats'),
   listTests: (publishedOnly?: boolean) => invoke('tests:list', publishedOnly),
   getTest: (id: number) => invoke('tests:get', id),
-  createTest: (payload: unknown, createdBy?: number) =>
-    invoke('tests:create', payload, createdBy),
+  createTest: (payload: unknown, createdBy?: number) => invoke('tests:create', payload, createdBy),
+  createTestWithExcel: (payload: unknown, buffer: ArrayBuffer, createdBy?: number) =>
+    invoke('tests:createFromExcel', payload, buffer, createdBy),
   updateTest: (id: number, payload: unknown) => invoke('tests:update', id, payload),
   deleteTest: (id: number) => invoke('tests:delete', id),
   getQuestions: (testId: number) => invoke('questions:list', testId),

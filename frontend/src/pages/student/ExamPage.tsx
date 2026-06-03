@@ -97,7 +97,9 @@ export function ExamPage() {
       try {
         await api.submitAttempt(id, autoSubmit);
         reset();
-        toast.success(autoSubmit ? 'Time expired — test auto-submitted' : 'Test submitted successfully');
+        toast.success(
+          autoSubmit ? 'Time expired — test auto-submitted' : 'Test submitted successfully'
+        );
         navigate(`/student/result/${id}`);
       } catch (e) {
         toast.error(e instanceof Error ? e.message : 'Submit failed');
@@ -157,9 +159,19 @@ export function ExamPage() {
     <Box minHeight="100vh" bgcolor="background.default" p={2}>
       <Box maxWidth={1200} mx="auto">
         <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-          <Typography variant="h6" fontWeight={700}>
-            {test.title}
-          </Typography>
+          <Box display="flex" alignItems="center" gap={1}>
+            <Button
+              startIcon={<ArrowBackIcon />}
+              onClick={() => navigate('/student/tests')}
+              variant="text"
+              size="small"
+            >
+              Back
+            </Button>
+            <Typography variant="h6" fontWeight={700}>
+              {test.title}
+            </Typography>
+          </Box>
           <Chip
             icon={<TimerIcon />}
             label={formatTimer(timeLeftSeconds)}
@@ -254,7 +266,11 @@ export function ExamPage() {
                       Next
                     </Button>
                   ) : (
-                    <Button variant="contained" color="success" onClick={() => setConfirmOpen(true)}>
+                    <Button
+                      variant="contained"
+                      color="success"
+                      onClick={() => setConfirmOpen(true)}
+                    >
                       Submit Test
                     </Button>
                   )}
@@ -269,7 +285,8 @@ export function ExamPage() {
         <DialogTitle>Submit Test?</DialogTitle>
         <DialogContent>
           <Typography>
-            You have answered {answeredCount} of {questions.length} questions. This cannot be undone.
+            You have answered {answeredCount} of {questions.length} questions. This cannot be
+            undone.
           </Typography>
         </DialogContent>
         <DialogActions>

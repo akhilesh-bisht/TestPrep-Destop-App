@@ -25,15 +25,19 @@ function registerIpcHandlers(paths) {
     'tests:list': (publishedOnly) => ensureApp(paths).listTests(publishedOnly),
     'tests:get': (id) => ensureApp(paths).getTest(id),
     'tests:create': (payload, createdBy) => ensureApp(paths).createTest(payload, createdBy),
+    'tests:createFromExcel': (payload, fileBuffer, createdBy) =>
+      ensureApp(paths).createTestFromExcel(payload, Buffer.from(fileBuffer), createdBy),
     'tests:update': (id, payload) => ensureApp(paths).updateTest(id, payload),
     'tests:delete': (id) => ensureApp(paths).deleteTest(id),
     'questions:list': (testId) => ensureApp(paths).getQuestions(testId),
     'questions:add': (payload) => ensureApp(paths).addQuestion(payload),
     'questions:delete': (id) => ensureApp(paths).deleteQuestion(id),
-    'questions:import': (testId, buffer) => ensureApp(paths).importQuestions(testId, Buffer.from(buffer)),
+    'questions:import': (testId, buffer) =>
+      ensureApp(paths).importQuestions(testId, Buffer.from(buffer)),
     'attempts:start': (userId, testId) => ensureApp(paths).startAttempt(userId, testId),
     'attempts:saveAnswer': (payload) => ensureApp(paths).saveAnswer(payload),
-    'attempts:submit': (attemptId, autoSubmit) => ensureApp(paths).submitAttempt(attemptId, autoSubmit),
+    'attempts:submit': (attemptId, autoSubmit) =>
+      ensureApp(paths).submitAttempt(attemptId, autoSubmit),
     'attempts:session': (attemptId) => ensureApp(paths).getAttemptSession(attemptId),
     'attempts:result': (attemptId) => ensureApp(paths).getResult(attemptId),
     'attempts:history': (userId) => ensureApp(paths).getUserHistory(userId),

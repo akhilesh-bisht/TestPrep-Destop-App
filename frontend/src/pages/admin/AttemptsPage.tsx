@@ -1,4 +1,16 @@
-import { Card, Chip, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
+import {
+  Box,
+  Card,
+  Chip,
+  IconButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Typography,
+} from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '@/services/api';
@@ -26,9 +38,14 @@ export function AttemptsPage() {
 
   return (
     <>
-      <Typography variant="h5" fontWeight={700} mb={3}>
-        Test Attempts & Results
-      </Typography>
+      <Box display="flex" alignItems="center" gap={2} mb={3}>
+        <IconButton onClick={() => navigate('/admin/dashboard')} size="small">
+          <ArrowBackIcon />
+        </IconButton>
+        <Typography variant="h5" fontWeight={700}>
+          Test Attempts & Results
+        </Typography>
+      </Box>
       {attempts.length === 0 ? (
         <Card>
           <EmptyState

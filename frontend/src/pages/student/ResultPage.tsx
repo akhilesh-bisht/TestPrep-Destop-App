@@ -5,12 +5,14 @@ import {
   CardContent,
   Chip,
   Grid,
+  IconButton,
   LinearProgress,
   Typography,
   alpha,
   useTheme,
 } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CancelIcon from '@mui/icons-material/Cancel';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { useEffect, useState } from 'react';
@@ -45,6 +47,11 @@ export function ResultPage() {
 
   return (
     <Box maxWidth={900} mx="auto" p={3}>
+      <Box display="flex" alignItems="center" gap={2} mb={3}>
+        <IconButton onClick={() => navigate(backPath)} size="small">
+          <ArrowBackIcon />
+        </IconButton>
+      </Box>
       <Card
         component={motion.div}
         initial={{ opacity: 0, scale: 0.98 }}

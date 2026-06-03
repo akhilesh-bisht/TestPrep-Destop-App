@@ -54,6 +54,10 @@ export class App {
     return this.wrap(() => this.tests.createTest(payload, createdBy));
   }
 
+  createTestFromExcel(payload: unknown, fileBuffer: Buffer, createdBy?: number) {
+    return this.wrap(() => this.tests.createTestFromExcel(payload, fileBuffer, createdBy));
+  }
+
   updateTest(id: number, payload: unknown) {
     return this.wrap(() => this.tests.updateTest(id, payload));
   }

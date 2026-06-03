@@ -1,5 +1,15 @@
-import { Card, CardContent, Grid, Typography, Box, LinearProgress } from '@mui/material';
+import {
+  Card,
+  CardContent,
+  Grid,
+  Typography,
+  Box,
+  LinearProgress,
+  IconButton,
+} from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { api } from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { StatCard } from '@/components/common/StatCard';
@@ -11,6 +21,7 @@ import type { PerformanceAnalytics } from '@/types';
 import { formatPercent } from '@/utils/format';
 
 export function AnalyticsPage() {
+  const navigate = useNavigate();
   const user = useAuthStore((s) => s.user)!;
   const [data, setData] = useState<PerformanceAnalytics | null>(null);
   const [loading, setLoading] = useState(true);
@@ -27,9 +38,14 @@ export function AnalyticsPage() {
 
   return (
     <>
-      <Typography variant="h5" fontWeight={700} mb={3}>
-        Performance Analytics
-      </Typography>
+      <Box display="flex" alignItems="center" gap={2} mb={3}>
+        <IconButton onClick={() => navigate('/student/dashboard')} size="small">
+          <ArrowBackIcon />
+        </IconButton>
+        <Typography variant="h5" fontWeight={700}>
+          Performance Analytics
+        </Typography>
+      </Box>
       <Grid container spacing={3} mb={4}>
         <Grid item xs={12} sm={6} md={3}>
           <StatCard title="Total Attempts" value={data.totalAttempts} icon={<AssignmentIcon />} />
@@ -51,7 +67,12 @@ export function AnalyticsPage() {
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
-          <StatCard title="Tests Done" value={data.testsCompleted} icon={<AssignmentIcon />} color="#22d3ee" />
+          <StatCard
+            title="Tests Done"
+            value={data.testsCompleted}
+            icon={<AssignmentIcon />}
+            color="#22d3ee"
+          />
         </Grid>
       </Grid>
 
@@ -71,7 +92,11 @@ export function AnalyticsPage() {
                   </Typography>
                   <Typography variant="body2">{formatPercent(r.percentage)}</Typography>
                 </Box>
-                <LinearProgress variant="determinate" value={r.percentage} sx={{ height: 8, borderRadius: 4 }} />
+                <LinearProgress
+                  variant="determinate"
+                  value={r.percentage}
+                  sx={{ height: 8, borderRadius: 4 }}
+                />
               </Box>
             ))
           )}

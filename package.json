@@ -5,6 +5,7 @@
   "private": true,
   "main": "electron/main/index.js",
   "scripts": {
+    "preinstall": "node ./scripts/check-windows-env.js",
     "predev": "npm run build --prefix backend",
     "dev": "concurrently -k \"npm run dev:frontend\" \"npm run dev:electron\"",
     "dev:frontend": "npm run dev --prefix frontend",
@@ -21,14 +22,15 @@
     "frontend",
     "backend"
   ],
-"engines": {
-  "node": "20.x"
-},
+  "engines": {
+    "node": "20.x"
+  },
   "devDependencies": {
     "concurrently": "^9.1.2",
     "cross-env": "^7.0.3",
     "electron": "^34.2.0",
     "electron-builder": "^25.1.8",
+    "electron-rebuild": "^3.2.9",
     "prettier": "^3.5.3",
     "wait-on": "^8.0.2"
   },
@@ -49,17 +51,29 @@
       {
         "from": "database",
         "to": "database",
-        "filter": ["**/*"]
+        "filter": [
+          "**/*"
+        ]
       }
     ],
     "win": {
-      "target": ["nsis"]
+      "target": [
+        "nsis"
+      ]
     },
     "mac": {
-      "target": ["dmg"]
+      "target": [
+        "dmg"
+      ]
     },
     "linux": {
-      "target": ["AppImage"]
+      "target": [
+        "AppImage"
+      ]
     }
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.10.0",
+    "motion-utils": "^12.39.0"
   }
 }
