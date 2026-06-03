@@ -121,7 +121,7 @@ export function TestsManagePage() {
         setSelectedFileName('Excel file selected');
       }
     } catch (e) {
-      toast.error('Failed to select file' , e);
+      toast.error('Failed to select file');
     }
   };
 
