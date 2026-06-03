@@ -1,0 +1,65 @@
+{
+  "name": "test-prep-app",
+  "version": "1.0.0",
+  "description": "Offline-first desktop Test Preparation Application",
+  "private": true,
+  "main": "electron/main/index.js",
+  "scripts": {
+    "predev": "npm run build --prefix backend",
+    "dev": "concurrently -k \"npm run dev:frontend\" \"npm run dev:electron\"",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev:electron": "wait-on http://localhost:5173 && cross-env NODE_ENV=development electron .",
+    "build": "npm run build --prefix frontend && npm run build --prefix backend",
+    "build:frontend": "npm run build --prefix frontend",
+    "build:backend": "npm run build --prefix backend",
+    "dist": "npm run build && electron-builder",
+    "lint": "npm run lint --prefix frontend && npm run lint --prefix backend",
+    "format": "prettier --write \"**/*.{ts,tsx,js,json,md}\"",
+    "postinstall": "electron-rebuild -f -w better-sqlite3"
+  },
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+"engines": {
+  "node": "20.x"
+},
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "electron": "^34.2.0",
+    "electron-builder": "^25.1.8",
+    "prettier": "^3.5.3",
+    "wait-on": "^8.0.2"
+  },
+  "build": {
+    "appId": "com.testprep.app",
+    "productName": "TestPrep Pro",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "electron/**/*",
+      "frontend/dist/**/*",
+      "backend/dist/**/*",
+      "database/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "database",
+        "to": "database",
+        "filter": ["**/*"]
+      }
+    ],
+    "win": {
+      "target": ["nsis"]
+    },
+    "mac": {
+      "target": ["dmg"]
+    },
+    "linux": {
+      "target": ["AppImage"]
+    }
+  }
+}

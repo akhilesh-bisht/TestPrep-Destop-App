@@ -1,0 +1,1 @@
+-- Seeded via application (bcrypt hashes). See backend seed script.
