@@ -6,8 +6,10 @@ const { registerIpcHandlers } = require('../ipc/handlers');
 let mainWindow = null;
 
 function getDbPaths() {
-  const isDev = process.env.NODE_ENV === 'development';
+  const isDev = !app.isPackaged;
+
   const userData = app.getPath('userData');
+
   const dbPath = isDev
     ? path.join(process.cwd(), 'database', 'app.db')
     : path.join(userData, 'app.db');
@@ -20,7 +22,7 @@ function getDbPaths() {
 }
 
 function createWindow() {
-  const isDev = process.env.NODE_ENV === 'development';
+  const isDev = !app.isPackaged;
 
   mainWindow = new BrowserWindow({
     width: 1280,
@@ -42,9 +44,15 @@ function createWindow() {
     mainWindow.loadURL('http://localhost:5173');
     mainWindow.webContents.openDevTools({ mode: 'detach' });
   } else {
-    mainWindow.loadFile(path.join(process.cwd(), 'frontend', 'dist', 'index.html'));
-  }
+    const indexPath = path.join(__dirname, '../../frontend/dist/index.html');
 
+    console.log('app.isPackaged:', app.isPackaged);
+    console.log('__dirname:', __dirname);
+    console.log('indexPath:', indexPath);
+    console.log('exists:', fs.existsSync(indexPath));
+
+    mainWindow.loadFile(indexPath);
+  }
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
@@ -70,6 +78,8 @@ ipcMain.handle('dialog:openExcel', async () => {
     properties: ['openFile'],
     filters: [{ name: 'Excel', extensions: ['xlsx', 'xls', 'csv'] }],
   });
+
   if (result.canceled || !result.filePaths[0]) return null;
+
   return fs.readFileSync(result.filePaths[0]);
 });

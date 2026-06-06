@@ -13,7 +13,7 @@
     "build": "npm run build --prefix frontend && npm run build --prefix backend",
     "build:frontend": "npm run build --prefix frontend",
     "build:backend": "npm run build --prefix backend",
-    "dist": "npm run build && electron-builder",
+    "dist": "npm run build && electron-builder --win --x64",
     "lint": "npm run lint --prefix frontend && npm run lint --prefix backend",
     "format": "prettier --write \"**/*.{ts,tsx,js,json,md}\"",
     "postinstall": "electron-rebuild -f -w better-sqlite3"
